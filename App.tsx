@@ -361,10 +361,12 @@ export default function App() {
         <div className="mt-12 flex justify-center">
            <a 
              href={WHATSAPP_LINK}
-             className="text-brand-primary font-bold text-lg flex items-center gap-2 hover:underline p-2"
+             target="_blank"
+             rel="noopener noreferrer"
+             className="w-full max-w-2xl mx-auto bg-gray-50 border-2 border-brand-primary/30 text-brand-primary font-bold text-lg flex items-center justify-center gap-2 py-4 rounded-xl hover:bg-white hover:shadow-md transition-all group"
            >
              Ver mais depoimentos ao vivo no grupo
-             <ArrowRight size={20} />
+             <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
            </a>
         </div>
       </Section>
