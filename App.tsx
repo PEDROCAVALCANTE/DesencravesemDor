@@ -15,9 +15,7 @@ import {
 
 // --- Constants & Types ---
 
-const WHATSAPP_NUMBER = "5511999999999"; // Placeholder - would be replaced by client
-const WHATSAPP_MESSAGE = "Olá! Quero me tornar uma Especialista em Desencrave Sem Dor e faturar mais.";
-const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
+const WHATSAPP_LINK = "https://chat.whatsapp.com/FJkU6FUpQR71ichNbhIVGs";
 
 const IMAGES = {
   heel: "https://iili.io/f5GOwpj.jpg",
@@ -144,7 +142,7 @@ export default function App() {
             className="bg-brand-green text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-green-600 transition-colors hidden sm:flex items-center gap-2 animate-pulse hover:animate-none"
           >
             <MessageCircle size={16} />
-            Falar no WhatsApp
+            Entrar no Grupo VIP
           </a>
         </div>
       </header>
@@ -390,7 +388,7 @@ export default function App() {
           </p>
           <Button fullWidth className="max-w-md mx-auto text-xl py-5 bg-green-500 hover:bg-green-400 shadow-green-900/50">
             <MessageCircle className="w-8 h-8" />
-            GARANTIR MINHA VAGA NO WHATSAPP
+            GARANTIR MINHA VAGA NO GRUPO
           </Button>
           <p className="mt-8 text-sm text-gray-600">
             © 2024 Curso Desencrave Sem Dor. Todos os direitos reservados.
@@ -409,7 +407,7 @@ export default function App() {
         <MessageCircle size={36} />
         {/* Tooltip */}
         <span className="absolute right-full mr-4 bg-gray-900 text-white px-3 py-1.5 rounded-lg text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-lg">
-          Falar com Especialista
+          Entrar no Grupo VIP
         </span>
         {/* Notification Dot */}
         <span className="absolute -top-1 -right-1 flex h-4 w-4">
@@ -426,7 +424,7 @@ export default function App() {
       >
         <Button fullWidth className="shadow-none py-3">
           <MessageCircle className="w-5 h-5" />
-          Falar com a Especialista
+          Entrar no Grupo VIP
         </Button>
       </div>
 
