@@ -7,12 +7,9 @@ import {
   Clock, 
   Heart, 
   ShieldCheck, 
-  Star,
   ZoomIn,
   X,
-  Users,
-  Quote,
-  ImageIcon
+  Quote
 } from 'lucide-react';
 
 // --- Constants & Types ---
