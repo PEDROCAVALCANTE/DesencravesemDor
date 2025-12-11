@@ -238,7 +238,7 @@ export default function App() {
               <img 
                 src={IMAGES.toe} 
                 alt="Desencrave de unha sem dor" 
-                className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105"
+                className="object-cover object-top w-full h-full transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
                  <div className="bg-white/90 p-3 rounded-full opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 shadow-lg">
