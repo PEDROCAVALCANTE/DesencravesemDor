@@ -39,7 +39,7 @@ const Button = ({
 }) => {
   const baseStyle = "flex items-center justify-center gap-2 px-6 py-4 rounded-full font-bold text-lg transition-all transform hover:scale-105 shadow-lg active:scale-95";
   const variants = {
-    primary: "bg-brand-green text-white hover:bg-green-600 hover:shadow-green-200",
+    primary: "bg-brand-green text-white hover:bg-green-600 hover:shadow-green-200 ring-4 ring-green-100",
     outline: "border-2 border-brand-primary text-brand-primary hover:bg-brand-soft"
   };
 
@@ -96,17 +96,17 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen font-sans text-gray-800 bg-white pb-24 md:pb-0">
+    <div className="min-h-screen font-sans text-gray-800 bg-white pb-24 md:pb-0 relative">
       
       {/* Header / Nav */}
-      <header className="bg-white py-4 px-4 shadow-sm sticky top-0 z-50">
+      <header className="bg-white py-4 px-4 shadow-sm sticky top-0 z-40">
         <div className="max-w-4xl mx-auto flex justify-between items-center">
           <span className="font-bold text-brand-primary text-xl tracking-tight">
             Desencrave<span className="text-brand-green">SemDor</span>
           </span>
           <a 
             href={WHATSAPP_LINK}
-            className="bg-brand-green text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-green-600 transition-colors hidden sm:flex items-center gap-2"
+            className="bg-brand-green text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-green-600 transition-colors hidden sm:flex items-center gap-2 animate-pulse hover:animate-none"
           >
             <MessageCircle size={16} />
             Falar no WhatsApp
@@ -116,8 +116,8 @@ export default function App() {
 
       {/* Hero Section */}
       <Section className="text-center pt-10 pb-16 bg-gradient-to-b from-brand-soft/30 to-white">
-        <div className="inline-block px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-semibold mb-6 animate-pulse">
-          Vagas Abertas: Curso Desencrave Sem Dor
+        <div className="inline-block px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-semibold mb-6 animate-bounce">
+          🔥 Vagas Abertas: Curso Desencrave Sem Dor
         </div>
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-6">
           Pare de sofrer com o palito e comece a <span className="text-brand-primary">faturar como Especialista</span>
@@ -130,8 +130,9 @@ export default function App() {
             <MessageCircle className="w-6 h-6" />
             Quero Entrar no Grupo VIP
           </Button>
-          <p className="text-sm text-gray-500 mt-2 sm:mt-0">
-            Junte-se a mais de 800 profissionais
+          <p className="text-sm text-gray-500 mt-2 sm:mt-0 flex items-center gap-1">
+            <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+            Mais de 800 alunas online agora
           </p>
         </div>
       </Section>
@@ -346,13 +347,33 @@ export default function App() {
         </div>
       </footer>
 
+      {/* FIXED FLOATING WHATSAPP BUTTON (Desktop/All) */}
+      <a
+        href={WHATSAPP_LINK}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-6 right-6 z-50 hidden md:flex items-center justify-center w-16 h-16 bg-[#25D366] text-white rounded-full shadow-[0_4px_20px_rgba(37,211,102,0.4)] hover:bg-[#20bd5a] transform hover:scale-110 transition-all duration-300 group"
+        aria-label="Chamar no WhatsApp"
+      >
+        <MessageCircle size={36} />
+        {/* Tooltip */}
+        <span className="absolute right-full mr-4 bg-gray-900 text-white px-3 py-1.5 rounded-lg text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-lg">
+          Falar com Especialista
+        </span>
+        {/* Notification Dot */}
+        <span className="absolute -top-1 -right-1 flex h-4 w-4">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+          <span className="relative inline-flex rounded-full h-4 w-4 bg-red-500 border-2 border-white"></span>
+        </span>
+      </a>
+
       {/* Sticky Mobile CTA */}
       <div 
-        className={`fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-gray-200 shadow-2xl z-50 transform transition-transform duration-300 md:hidden ${
+        className={`fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-gray-200 shadow-[0_-5px_20px_-5px_rgba(0,0,0,0.1)] z-50 transform transition-transform duration-300 md:hidden ${
           showSticky ? 'translate-y-0' : 'translate-y-full'
         }`}
       >
-        <Button fullWidth className="shadow-none">
+        <Button fullWidth className="shadow-none py-3">
           <MessageCircle className="w-5 h-5" />
           Falar com a Especialista
         </Button>
