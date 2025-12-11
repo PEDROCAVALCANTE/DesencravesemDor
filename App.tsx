@@ -18,7 +18,7 @@ const WHATSAPP_LINK = "https://chat.whatsapp.com/FJkU6FUpQR71ichNbhIVGs";
 
 const IMAGES = {
   heel: "https://iili.io/f5GOwpj.jpg",
-  toe: "https://iili.io/f5GDewl.jpg",
+  toe: "https://iili.io/f5j1xnI.jpg",
   podiatrist: "https://iili.io/f5jSXBn.jpg"
 };
 
