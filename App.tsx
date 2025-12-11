@@ -17,7 +17,7 @@ import {
 const WHATSAPP_LINK = "https://chat.whatsapp.com/FJkU6FUpQR71ichNbhIVGs";
 
 const IMAGES = {
-  heel: "https://iili.io/f5GOwpj.jpg",
+  heel: "https://iili.io/f5N5KLF.jpg",
   toe: "https://iili.io/f5j1xnI.jpg",
   podiatrist: "https://iili.io/f5jSXBn.jpg"
 };
@@ -125,14 +125,16 @@ const TestimonialBubble = ({ name, text, time }: { name: string, text: string, t
 
 export default function App() {
   const [showSticky, setShowSticky] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
-  // Scroll logic for sticky button
+  // Scroll logic for sticky button and parallax
   useEffect(() => {
     const handleScroll = () => {
+      setScrollY(window.scrollY);
       setShowSticky(window.scrollY > 400);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -155,24 +157,40 @@ export default function App() {
         </div>
       </header>
 
-      {/* Hero Section */}
-      <Section className="text-center pt-10 pb-16 bg-gradient-to-b from-brand-soft/30 to-white">
-        <div className="inline-block px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-semibold mb-6 animate-bounce">
-          🔥 Vagas Abertas: Curso Desencrave Sem Dor
+      {/* Hero Section with Parallax */}
+      <div className="relative pt-16 pb-20 md:pt-24 md:pb-32 overflow-hidden">
+        {/* Parallax Background */}
+        <div 
+          className="absolute inset-0 z-0"
+          style={{
+            backgroundImage: `url(${IMAGES.podiatrist})`,
+            backgroundPosition: 'center 20%',
+            backgroundSize: 'cover',
+            transform: `translate3d(0, ${scrollY * 0.4}px, 0)`,
+            willChange: 'transform'
+          }}
+        />
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/95 via-white/90 to-white z-10" />
+
+        <div className="relative z-20 max-w-4xl mx-auto px-4 text-center">
+          <div className="inline-block px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-semibold mb-6 animate-bounce">
+            🔥 Vagas Abertas: Curso Desencrave Sem Dor
+          </div>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-6">
+            Pare de sofrer com o palito e comece a <span className="text-brand-primary">faturar como Especialista</span>
+          </h1>
+          <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            Aprenda a técnica de <strong>Desencrave Sem Dor</strong> e <strong>Calo Peel</strong> usando apenas produtos. Sem esforço mecânico, sem dor para a cliente e cobrando valor diferenciado.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Button className="w-full sm:w-auto text-xl shadow-green-300/50">
+              <MessageCircle className="w-6 h-6" />
+              Quero Entrar no Grupo VIP
+            </Button>
+          </div>
         </div>
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-6">
-          Pare de sofrer com o palito e comece a <span className="text-brand-primary">faturar como Especialista</span>
-        </h1>
-        <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-          Aprenda a técnica de <strong>Desencrave Sem Dor</strong> e <strong>Calo Peel</strong> usando apenas produtos. Sem esforço mecânico, sem dor para a cliente e cobrando valor diferenciado.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <Button className="w-full sm:w-auto text-xl shadow-green-300/50">
-            <MessageCircle className="w-6 h-6" />
-            Quero Entrar no Grupo VIP
-          </Button>
-        </div>
-      </Section>
+      </div>
 
       {/* The Problem vs Solution */}
       <Section className="bg-white">
