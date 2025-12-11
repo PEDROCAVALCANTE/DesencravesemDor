@@ -9,7 +9,8 @@ import {
   ShieldCheck, 
   Star,
   ZoomIn,
-  X
+  X,
+  Users
 } from 'lucide-react';
 
 // --- Constants & Types ---
@@ -86,13 +87,47 @@ const Card = ({ title, icon: Icon, children }: { title: string; icon: any; child
 export default function App() {
   const [showSticky, setShowSticky] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [studentCount, setStudentCount] = useState(0);
 
+  // Scroll logic for sticky button
   useEffect(() => {
     const handleScroll = () => {
       setShowSticky(window.scrollY > 400);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Counter Animation Logic
+  useEffect(() => {
+    const targetCount = 854;
+    const duration = 2000; // 2 seconds to reach target
+    const intervalTime = 20;
+    const steps = duration / intervalTime;
+    const increment = targetCount / steps;
+
+    let currentCount = 0;
+    
+    // Initial count up animation
+    const timer = setInterval(() => {
+      currentCount += increment;
+      if (currentCount >= targetCount) {
+        setStudentCount(targetCount);
+        clearInterval(timer);
+      } else {
+        setStudentCount(Math.floor(currentCount));
+      }
+    }, intervalTime);
+
+    // "Live" updates - add a random student every 8-15 seconds
+    const liveUpdateTimer = setInterval(() => {
+      setStudentCount(prev => prev + 1);
+    }, 12000);
+
+    return () => {
+      clearInterval(timer);
+      clearInterval(liveUpdateTimer);
+    };
   }, []);
 
   return (
@@ -130,10 +165,26 @@ export default function App() {
             <MessageCircle className="w-6 h-6" />
             Quero Entrar no Grupo VIP
           </Button>
-          <p className="text-sm text-gray-500 mt-2 sm:mt-0 flex items-center gap-1">
-            <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-            Mais de 800 alunas online agora
-          </p>
+          
+          {/* Dynamic Counter */}
+          <div className="flex items-center gap-3 bg-white px-4 py-2 rounded-full border border-gray-100 shadow-sm mt-4 sm:mt-0">
+            <div className="relative">
+              <Users className="text-brand-primary w-5 h-5" />
+              <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+              </span>
+            </div>
+            <div className="text-left leading-tight">
+              <span className="block font-bold text-gray-900 text-lg transition-all duration-300">
+                +{studentCount}
+              </span>
+              <span className="text-xs text-gray-500 uppercase tracking-wide font-semibold">
+                Alunas Inscritas
+              </span>
+            </div>
+          </div>
+
         </div>
       </Section>
 
@@ -299,7 +350,7 @@ export default function App() {
             <div className="flex flex-wrap justify-center md:justify-start gap-4">
                <div className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-lg backdrop-blur-sm">
                  <Star className="text-yellow-400 w-5 h-5 fill-yellow-400" />
-                 <span className="font-bold">+820 Alunas no Grupo</span>
+                 <span className="font-bold">+{studentCount} Alunas no Grupo</span>
                </div>
                <div className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-lg backdrop-blur-sm">
                  <ShieldCheck className="text-brand-green w-5 h-5" />
