@@ -10,7 +10,9 @@ import {
   Star,
   ZoomIn,
   X,
-  Users
+  Users,
+  Quote,
+  ImageIcon
 } from 'lucide-react';
 
 // --- Constants & Types ---
@@ -20,8 +22,37 @@ const WHATSAPP_LINK = "https://chat.whatsapp.com/FJkU6FUpQR71ichNbhIVGs";
 const IMAGES = {
   heel: "https://iili.io/f5GOwpj.jpg",
   toe: "https://iili.io/f5GDewl.jpg",
-  podiatrist: "https://iili.io/f5GjOIp.jpg"
+  podiatrist: "https://iili.io/f5jSXBn.jpg"
 };
+
+const FEEDBACK_PRINTS = [
+  "https://iili.io/f5jIv6l.jpg",
+  "https://iili.io/f5hs1Qp.jpg",
+  "https://iili.io/f5hsHhl.jpg"
+];
+
+const TESTIMONIALS = [
+  {
+    name: "Lucilene SPA",
+    text: "Seus cursos pra nós manicure e pedicure é um divisor de águas, pois aprendemos a cuidar melhor das nossas clientes, oferecendo a elas cada dia mais procedimentos. Eu amei conhecer vc e seus cursos. Gratidão de todo coração.",
+    time: "20:45"
+  },
+  {
+    name: "Aluna Nail Designer",
+    text: "Eu confesso que estou realmente assustada (no bom sentido). Quando minha cliente voltou fiquei em choque com o resultado! Dá pra ouvir ela mesma dizendo: 'não dói nada'. Esse curso está sendo um divisor de águas na minha vida e no meu trabalho.",
+    time: "09:15"
+  },
+  {
+    name: "Aluna do TikTok",
+    text: "Vi sua postagem no tiktok e fiquei tão ansiosa que quase não dormi. Consegui adquirir seu curso e é muito gratificante aprender mais com alguém tão experiente como vc. Muito obrigada por dividir seu conhecimento, virei sua fã.",
+    time: "14:20"
+  },
+  {
+    name: "Aluna Satisfeita",
+    text: "Tenho recebido muitos elogios e comentários positivos sobre o trabalho. Todos estão gostando muito e elogiando cada cuidado e capricho. O sucesso de meu trabalho é empenho do resultado do seu trabalho e do amor que coloca em cada aula.",
+    time: "16:05"
+  }
+];
 
 // --- Components ---
 
@@ -77,6 +108,19 @@ const Card = ({ title, icon: Icon, children }: { title: string; icon: any; child
     </div>
     <h3 className="text-xl font-bold text-gray-900 mb-2">{title}</h3>
     <p className="text-gray-600 leading-relaxed">{children}</p>
+  </div>
+);
+
+const TestimonialBubble = ({ name, text, time }: { name: string, text: string, time: string }) => (
+  <div className="bg-white p-4 rounded-tr-2xl rounded-bl-2xl rounded-br-2xl rounded-tl-none shadow-sm border border-gray-100 relative ml-4 mb-2">
+    <div className="absolute top-0 left-0 -ml-2 w-4 h-4 bg-white border-l border-b border-gray-100 transform rotate-45 clip-triangle"></div>
+    <div className="flex items-center justify-between mb-1">
+      <span className="text-sm font-bold text-brand-dark">{name}</span>
+    </div>
+    <p className="text-gray-700 text-sm leading-relaxed mb-2">{text}</p>
+    <div className="text-right">
+      <span className="text-[10px] text-gray-400">{time}</span>
+    </div>
   </div>
 );
 
@@ -317,6 +361,68 @@ export default function App() {
         </div>
       </Section>
 
+      {/* Testimonials / Social Proof */}
+      <Section className="bg-[#E5DDD5]/40" containerClass="max-w-6xl"> 
+        <div className="text-center mb-10">
+           <span className="text-brand-primary font-bold tracking-wider text-sm uppercase mb-2 block">Prova Social</span>
+           <h2 className="text-3xl font-bold text-gray-900 mb-4">Veja o que estão falando no Grupo VIP</h2>
+           <p className="text-gray-600 max-w-2xl mx-auto">
+             Depoimentos reais de alunas que já estão aplicando a técnica e transformando seus atendimentos.
+           </p>
+        </div>
+
+        {/* Real Screenshots Grid - PRIORITY DISPLAY */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          {FEEDBACK_PRINTS.map((img, idx) => (
+            <div 
+              key={idx} 
+              className="rounded-xl overflow-hidden shadow-lg cursor-pointer hover:shadow-2xl transition-all hover:scale-105 border border-gray-200 bg-white group h-80 md:h-[400px] relative"
+              onClick={() => setSelectedImage(img)}
+            >
+              <img 
+               src={img} 
+               alt={`Print de depoimento do WhatsApp ${idx + 1}`} 
+               className="w-full h-full object-cover object-top" 
+              />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all flex items-center justify-center">
+                 <div className="bg-white/90 px-5 py-3 rounded-full text-base font-bold text-brand-primary shadow-xl flex items-center gap-2 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                   <ZoomIn size={20} /> Ver Feedback
+                 </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <p className="text-center text-sm text-gray-500 mb-10 italic">
+          Toque nas imagens acima para ler os depoimentos originais
+        </p>
+
+        {/* Text Bubbles (Transcription) */}
+        <div className="bg-white/50 p-6 rounded-2xl border border-gray-100">
+          <h3 className="text-lg font-bold text-gray-800 mb-6 text-center flex items-center justify-center gap-2">
+            <Quote className="text-brand-primary w-5 h-5" />
+            Transcrição dos Melhores Momentos
+          </h3>
+          <div className="grid md:grid-cols-2 gap-6">
+            {TESTIMONIALS.map((t, i) => (
+               <div key={i} className="flex flex-col">
+                 <TestimonialBubble name={t.name} text={t.text} time={t.time} />
+               </div>
+            ))}
+          </div>
+        </div>
+        
+        <div className="mt-12 flex justify-center">
+           <a 
+             href={WHATSAPP_LINK}
+             className="text-brand-primary font-bold text-lg flex items-center gap-2 hover:underline p-2"
+           >
+             Ver mais depoimentos ao vivo no grupo
+             <ArrowRight size={20} />
+           </a>
+        </div>
+      </Section>
+
       {/* Authority / Bio */}
       <Section className="bg-brand-primary text-white overflow-hidden relative">
         <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-16 -mt-16 blur-3xl"></div>
@@ -327,7 +433,7 @@ export default function App() {
             <div className="relative mx-auto w-64 h-64 md:w-full md:h-auto aspect-square rounded-full md:rounded-2xl overflow-hidden border-4 border-white/30 shadow-2xl">
               <img 
                 src={IMAGES.podiatrist} 
-                alt="Foto da Podóloga Instrutora" 
+                alt="Foto da Podóloga Marta Figueira" 
                 className="object-cover w-full h-full"
               />
             </div>
@@ -337,7 +443,7 @@ export default function App() {
               A PIONEIRA
             </div>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Quem vai te ensinar?
+              Conheça Marta Figueira
             </h2>
             <p className="text-brand-soft text-lg mb-6 leading-relaxed">
               Sou a <strong className="text-white">primeira podóloga</strong> a ensinar manicures a fazerem o desencrave sem dor utilizando produtos específicos.
