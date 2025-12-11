@@ -6,8 +6,10 @@ import {
   TrendingUp, 
   Clock, 
   Heart, 
-  ShieldCheck,
-  Star
+  ShieldCheck, 
+  Star,
+  ZoomIn,
+  X
 } from 'lucide-react';
 
 // --- Constants & Types ---
@@ -53,9 +55,17 @@ const Button = ({
   );
 };
 
-const Section = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
+const Section = ({ 
+  children, 
+  className = "", 
+  containerClass = "max-w-4xl" 
+}: { 
+  children: React.ReactNode; 
+  className?: string; 
+  containerClass?: string;
+}) => (
   <section className={`py-12 md:py-20 px-4 md:px-8 ${className}`}>
-    <div className="max-w-4xl mx-auto">
+    <div className={`${containerClass} mx-auto`}>
       {children}
     </div>
   </section>
@@ -75,6 +85,7 @@ const Card = ({ title, icon: Icon, children }: { title: string; icon: any; child
 
 export default function App() {
   const [showSticky, setShowSticky] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -181,48 +192,77 @@ export default function App() {
       </Section>
 
       {/* Visual Proof / Gallery */}
-      <Section className="bg-gray-50">
+      <Section className="bg-gray-50" containerClass="max-w-6xl">
         <h2 className="text-3xl font-bold text-center mb-4 text-gray-900">Resultados Reais</h2>
-        <p className="text-center text-gray-600 mb-10">
-          Veja o que você será capaz de fazer sem usar força, apenas técnica e produto.
+        <p className="text-center text-gray-600 mb-10 max-w-3xl mx-auto">
+          Veja o que você será capaz de fazer sem usar força, apenas técnica e produto. 
+          <br /><span className="text-sm italic">(Clique nas imagens para ampliar)</span>
         </p>
         
-        <div className="grid md:grid-cols-2 gap-8">
-          <div className="bg-white p-4 rounded-xl shadow-md">
-            <div className="relative aspect-video rounded-lg overflow-hidden mb-4 bg-gray-200">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12">
+          {/* Card 1 */}
+          <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow border border-gray-100 flex flex-col group">
+            <div 
+              className="relative h-72 md:h-80 w-full bg-gray-200 cursor-zoom-in overflow-hidden"
+              onClick={() => setSelectedImage(IMAGES.heel)}
+            >
               <img 
                 src={IMAGES.heel} 
                 alt="Tratamento de Calo Peel Antes e Depois" 
-                className="object-cover w-full h-full hover:scale-105 transition-transform duration-500"
+                className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105"
               />
-              <div className="absolute bottom-2 left-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
-                Calo Peel / Rachaduras
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                 <div className="bg-white/90 p-3 rounded-full opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 shadow-lg">
+                   <ZoomIn className="text-brand-primary w-6 h-6" />
+                 </div>
+              </div>
+              <div className="absolute bottom-4 left-4">
+                 <span className="text-white font-bold text-sm tracking-wide bg-black/70 backdrop-blur-sm px-3 py-1.5 rounded-lg shadow-sm border border-white/20">
+                    Calo Peel / Rachaduras
+                 </span>
               </div>
             </div>
-            <h3 className="font-bold text-lg text-gray-800">Recuperação de Calcanhar</h3>
-            <p className="text-sm text-gray-500">Tratamento indolor que remove toda a calosidade e devolve a maciez.</p>
+            
+            <div className="p-6 text-center bg-white relative z-10">
+               <h3 className="font-bold text-xl text-gray-900 mb-2">Recuperação de Calcanhar</h3>
+               <p className="text-gray-600">Tratamento indolor que remove toda a calosidade e devolve a maciez.</p>
+            </div>
           </div>
 
-          <div className="bg-white p-4 rounded-xl shadow-md">
-            <div className="relative aspect-video rounded-lg overflow-hidden mb-4 bg-gray-200">
+          {/* Card 2 */}
+          <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow border border-gray-100 flex flex-col group">
+            <div 
+              className="relative h-72 md:h-80 w-full bg-gray-200 cursor-zoom-in overflow-hidden"
+              onClick={() => setSelectedImage(IMAGES.toe)}
+            >
               <img 
                 src={IMAGES.toe} 
                 alt="Desencrave de unha sem dor" 
-                className="object-cover w-full h-full hover:scale-105 transition-transform duration-500"
+                className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105"
               />
-              <div className="absolute bottom-2 left-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
-                Desencrave Sem Dor
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                 <div className="bg-white/90 p-3 rounded-full opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 shadow-lg">
+                   <ZoomIn className="text-brand-primary w-6 h-6" />
+                 </div>
+              </div>
+              <div className="absolute bottom-4 left-4">
+                 <span className="text-white font-bold text-sm tracking-wide bg-black/70 backdrop-blur-sm px-3 py-1.5 rounded-lg shadow-sm border border-white/20">
+                    Desencrave Sem Dor
+                 </span>
               </div>
             </div>
-            <h3 className="font-bold text-lg text-gray-800">Correção de Unha Encravada</h3>
-            <p className="text-sm text-gray-500">Sem alicate fundo, sem sangue. Alívio imediato para a cliente.</p>
+            
+            <div className="p-6 text-center bg-white relative z-10">
+               <h3 className="font-bold text-xl text-gray-900 mb-2">Correção de Unha Encravada</h3>
+               <p className="text-gray-600">Sem alicate fundo, sem sangue. Alívio imediato para a cliente.</p>
+            </div>
           </div>
         </div>
         
-        <div className="mt-10 text-center">
-          <Button variant="primary" className="w-full md:w-auto">
+        <div className="mt-12 text-center">
+          <Button variant="primary" className="w-full md:w-auto px-8 py-4 text-xl">
             Quero aprender essa técnica agora
-            <ArrowRight className="w-5 h-5" />
+            <ArrowRight className="w-6 h-6" />
           </Button>
         </div>
       </Section>
@@ -317,6 +357,41 @@ export default function App() {
           Falar com a Especialista
         </Button>
       </div>
+
+      {/* Lightbox / Modal */}
+      {selectedImage && (
+        <div 
+          className="fixed inset-0 z-[60] bg-black/95 flex items-center justify-center p-2 md:p-8 backdrop-blur-sm transition-opacity duration-300"
+          onClick={() => setSelectedImage(null)}
+        >
+          <button 
+            className="absolute top-4 right-4 text-white/70 hover:text-white p-2 rounded-full hover:bg-white/10 transition-colors z-50"
+            onClick={(e) => {
+              e.stopPropagation();
+              setSelectedImage(null);
+            }}
+          >
+            <X size={40} />
+          </button>
+          
+          <div 
+            className="relative max-w-5xl w-full h-full flex items-center justify-center"
+            onClick={(e) => e.stopPropagation()} // Prevent close when clicking image area
+          >
+             <img 
+               src={selectedImage} 
+               alt="Zoom Visualização" 
+               className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl animate-in fade-in zoom-in duration-300" 
+             />
+          </div>
+          
+          <div className="absolute bottom-8 left-0 right-0 text-center pointer-events-none">
+            <span className="text-white/80 bg-black/50 px-4 py-2 rounded-full text-sm backdrop-blur-md">
+              Toque em qualquer lugar para fechar
+            </span>
+          </div>
+        </div>
+      )}
 
     </div>
   );
