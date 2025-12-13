@@ -17,8 +17,8 @@ import {
 const WHATSAPP_LINK = "https://chat.whatsapp.com/FJkU6FUpQR71ichNbhIVGs";
 
 const IMAGES = {
-  heel: "https://iili.io/f5N5KLF.jpg",
-  toe: "https://iili.io/f5j1xnI.jpg",
+  heel: "https://iili.io/f5j1xnI.jpg",
+  toe: "https://iili.io/f5N5KLF.jpg",
   podiatrist: "https://iili.io/f5jSXBn.jpg"
 };
 
@@ -59,7 +59,7 @@ const Button = ({
   fullWidth = false, 
   variant = "primary" 
 }: { 
-  children: React.ReactNode; 
+  children?: React.ReactNode; 
   className?: string; 
   fullWidth?: boolean;
   variant?: "primary" | "outline";
@@ -87,7 +87,7 @@ const Section = ({
   className = "", 
   containerClass = "max-w-4xl" 
 }: { 
-  children: React.ReactNode; 
+  children?: React.ReactNode; 
   className?: string; 
   containerClass?: string;
 }) => (
@@ -98,7 +98,7 @@ const Section = ({
   </section>
 );
 
-const Card = ({ title, icon: Icon, children }: { title: string; icon: any; children: React.ReactNode }) => (
+const Card = ({ title, icon: Icon, children }: { title: string; icon: any; children?: React.ReactNode }) => (
   <div className="bg-white p-6 rounded-2xl shadow-md border border-gray-100 hover:shadow-xl transition-shadow">
     <div className="bg-brand-soft w-12 h-12 rounded-full flex items-center justify-center mb-4">
       <Icon className="text-brand-dark w-6 h-6" />
@@ -256,7 +256,7 @@ export default function App() {
         </p>
         
         <div className="grid md:grid-cols-2 gap-8 md:gap-12">
-          {/* Card 1 */}
+          {/* Card 1 - Heel (Calo Peel) */}
           <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow border border-gray-100 flex flex-col group">
             <div 
               className="relative h-72 md:h-80 w-full bg-gray-200 cursor-zoom-in overflow-hidden"
@@ -265,7 +265,7 @@ export default function App() {
               <img 
                 src={IMAGES.heel} 
                 alt="Tratamento de Calo Peel Antes e Depois" 
-                className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105"
+                className="object-cover object-center w-full h-full transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
                  <div className="bg-white/90 p-3 rounded-full opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 shadow-lg">
@@ -285,7 +285,7 @@ export default function App() {
             </div>
           </div>
 
-          {/* Card 2 */}
+          {/* Card 2 - Toe (Unha Encravada) */}
           <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow border border-gray-100 flex flex-col group">
             <div 
               className="relative h-72 md:h-80 w-full bg-gray-200 cursor-zoom-in overflow-hidden"
@@ -294,7 +294,7 @@ export default function App() {
               <img 
                 src={IMAGES.toe} 
                 alt="Desencrave de unha sem dor" 
-                className="object-cover object-top w-full h-full transition-transform duration-700 group-hover:scale-105"
+                className="object-cover object-center w-full h-full transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
                  <div className="bg-white/90 p-3 rounded-full opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 shadow-lg">
@@ -333,7 +333,7 @@ export default function App() {
            </p>
         </div>
 
-        {/* Real Screenshots Grid - PRIORITY DISPLAY */}
+        {/* Real Screenshots Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           {FEEDBACK_PRINTS.map((img, idx) => (
             <div 
@@ -404,7 +404,7 @@ export default function App() {
               />
             </div>
           </div>
-          <div className="w-full md:w-2/3 text-center md:text-left">
+          <div className="w-full md:w-2/3 text-center">
             <div className="inline-block bg-brand-secondary text-white text-xs font-bold px-3 py-1 rounded-full mb-4">
               A PIONEIRA
             </div>
@@ -417,7 +417,7 @@ export default function App() {
             <p className="text-gray-100 mb-8 leading-relaxed">
               Minha missão é valorizar a sua profissão. Chega de ferir clientes e trabalhar de graça. Eu desenvolvi um método onde a dor da manicure acaba, e o alívio da cliente vira lucro no seu bolso.
             </p>
-            <div className="flex flex-wrap justify-center md:justify-start gap-4">
+            <div className="flex flex-wrap justify-center gap-4">
                <div className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-lg backdrop-blur-sm">
                  <ShieldCheck className="text-brand-green w-5 h-5" />
                  <span className="font-bold">Método Comprovado</span>
